@@ -16,7 +16,6 @@ const createBookZodSchema = z.object({
       email: z.string(),
     }),
     publication_date: z.string(),
-    reviews: z.array(reviewSchema),
     image_link: z.string(),
   }),
 });

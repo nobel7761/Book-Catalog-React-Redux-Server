@@ -9,7 +9,7 @@ export type IBook = {
     email: string;
   };
   publication_date: string;
-  reviews: IReview[];
+  reviews?: IReview[];
   image_link: string;
 };
 
