@@ -13,7 +13,7 @@ router.post(
   validateRequest(bookValidation.createBookZodSchema),
   BookController.createBook
 );
-// router.delete("/:id", BookController.deleteBookById);
+router.delete("/:id", BookController.deleteBookById);
 
 router.patch(
   "/book/:id",
