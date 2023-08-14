@@ -15,10 +15,10 @@ router.post(
 );
 // router.delete("/:id", BookController.deleteBookById);
 
-/* router.patch(
-  "/:id",
-  validateRequest(BookValidation.updateBookZodSchema),
+router.patch(
+  "/book/:id",
+  validateRequest(bookValidation.updateBookZodSchema),
   BookController.updateBookById
-); */
+);
 
 export const BookRoutes = router;
