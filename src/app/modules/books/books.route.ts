@@ -5,8 +5,8 @@ import validateRequest from "../../middlewares/validateRequest";
 
 const router = express.Router();
 
-// router.get("/:id", BookController.getBookById);
-router.get("/", BookController.getAllBooks);
+router.get("/book/:id", BookController.getSingleBook);
+router.get("/books", BookController.getAllBooks);
 // create admin
 router.post(
   "/create-book",
