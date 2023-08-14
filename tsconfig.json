@@ -1,0 +1,13 @@
+{
+  "compilerOptions": {
+    "target": "ES2020", // Set your target ECMAScript version
+    "module": "commonjs", // Set your module system
+    "outDir": "./dist", // Set the directory for compiled TypeScript files
+    "rootDir": "./src", // Set the root directory for your TypeScript source files
+    "strict": true, // Enable strict type checking
+    "esModuleInterop": true // Enable easier interoperability with CommonJS modules
+    // Add other settings as needed
+  },
+  "include": ["src/**/*.ts"], // Specify which files should be compiled (adjust the path)
+  "exclude": ["node_modules"] // Exclude certain directories from compilation
+}
