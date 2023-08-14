@@ -1,6 +1,6 @@
 import { IGenericResponse } from "../../../interfaces/common";
 import { IBookFilters, booksFilterableFields } from "./books.constant";
-import { IBook } from "./books.interace";
+import { IBook, IReview } from "./books.interace";
 import { Book } from "./books.model";
 
 const getAllBooks = async (
@@ -39,6 +39,24 @@ const getAllBooks = async (
   };
 };
 
+const getAllReviews = async (
+  id: string
+): Promise<IGenericResponse<IReview[]>> => {
+  const result = await Book.findOne({ _id: id }, { reviews: 1 });
+
+  if (!result) {
+    return {
+      data: [],
+    };
+  }
+
+  const reviews: IReview[] = result.reviews!;
+
+  return {
+    data: reviews,
+  };
+};
+
 const createBook = async (payload: IBook): Promise<IBook> => {
   const result = await Book.create(payload);
   return result;
@@ -72,4 +90,5 @@ export const BookService = {
   getSingleBook,
   updateBookById,
   deleteBookById,
+  getAllReviews,
 };

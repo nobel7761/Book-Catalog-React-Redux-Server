@@ -5,7 +5,7 @@ import { Request, Response } from "express";
 import pick from "../../../shared/pick";
 import { booksFilterableFields } from "./books.constant";
 import { BookService } from "./books.service";
-import { IBook } from "./books.interace";
+import { IBook, IReview } from "./books.interace";
 
 const getAllBooks = catchAsync(async (req: Request, res: Response) => {
   const filters = pick(req.query, booksFilterableFields);
@@ -16,6 +16,19 @@ const getAllBooks = catchAsync(async (req: Request, res: Response) => {
     statusCode: httpStatus.OK,
     success: true,
     message: "Books Retrieved Successfully",
+    data: result.data,
+  });
+});
+
+const getAllReviews = catchAsync(async (req: Request, res: Response) => {
+  const id = req.params.id;
+
+  const result = await BookService.getAllReviews(id);
+
+  sendResponse<IReview[]>(res, {
+    statusCode: httpStatus.OK,
+    success: true,
+    message: "Reviews Retrieved Successfully",
     data: result.data,
   });
 });
@@ -76,4 +89,5 @@ export const BookController = {
   getSingleBook,
   updateBookById,
   deleteBookById,
+  getAllReviews,
 };
