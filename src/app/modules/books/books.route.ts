@@ -9,7 +9,7 @@ router.get("/book/:id", BookController.getSingleBook);
 router.get("/books", BookController.getAllBooks);
 // create admin
 router.post(
-  "/create-book",
+  "/add-new-book",
   validateRequest(bookValidation.createBookZodSchema),
   BookController.createBook
 );
