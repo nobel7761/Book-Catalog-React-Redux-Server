@@ -7,14 +7,13 @@ const router = express.Router();
 
 router.get("/book/:id", BookController.getSingleBook);
 router.get("/books", BookController.getAllBooks);
-// create admin
+router.get("/reviews/:id", BookController.getAllReviews);
 router.post(
   "/add-new-book",
   validateRequest(bookValidation.createBookZodSchema),
   BookController.createBook
 );
 router.delete("/:id", BookController.deleteBookById);
-
 router.patch(
   "/book/:id",
   validateRequest(bookValidation.updateBookZodSchema),
