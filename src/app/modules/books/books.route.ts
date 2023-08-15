@@ -8,6 +8,11 @@ const router = express.Router();
 router.get("/book/:id", BookController.getSingleBook);
 router.get("/books", BookController.getAllBooks);
 router.get("/reviews/:id", BookController.getAllReviews);
+router.patch(
+  "/review/:id",
+  validateRequest(bookValidation.createReviewZodSchema),
+  BookController.createReview
+);
 router.post(
   "/add-new-book",
   validateRequest(bookValidation.createBookZodSchema),

@@ -62,6 +62,20 @@ const createBook = async (payload: IBook): Promise<IBook> => {
   return result;
 };
 
+const createReview = async (
+  id: string,
+  payload: Partial<IBook>
+): Promise<IBook | null> => {
+  console.log(id, payload);
+  const result = await Book.findById({ _id: id });
+
+  result?.reviews?.push(payload);
+
+  await result?.save();
+
+  return result;
+};
+
 const getSingleBook = async (id: string): Promise<IBook | null> => {
   const result = await Book.findOne({ _id: id });
   return result;
@@ -91,4 +105,5 @@ export const BookService = {
   updateBookById,
   deleteBookById,
   getAllReviews,
+  createReview,
 };

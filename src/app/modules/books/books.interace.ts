@@ -15,7 +15,7 @@ export type IBook = {
 
 export type IReview = {
   user: string;
-  rating: number;
+  rating?: number;
   comment: string;
 };
 
