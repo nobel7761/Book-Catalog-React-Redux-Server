@@ -13,7 +13,7 @@ export type ILoginUserResponse = {
 };
 
 export type ILoginUser = {
-  id: string;
+  email: string;
   password: string;
 };
 
