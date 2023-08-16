@@ -6,15 +6,21 @@ import { userValidation } from "./user.validation";
 const router = express.Router();
 
 router.post(
+  "/signup",
+  validateRequest(userValidation.createUserZodSchema),
+  UserController.createUser
+);
+
+router.post(
   "/login",
   validateRequest(userValidation.loginZodSchema),
   UserController.loginUser
 );
 
 router.post(
-  "/signup",
-  validateRequest(userValidation.createUserZodSchema),
-  UserController.createUser
+  "/logout",
+  validateRequest(userValidation.logoutZodSchema),
+  UserController.logoutUser
 );
 
 // router.post(

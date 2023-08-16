@@ -42,6 +42,24 @@ const loginUser = catchAsync(async (req: Request, res: Response) => {
   });
 });
 
+const logoutUser: RequestHandler = catchAsync(
+  async (req: Request, res: Response) => {
+    const cookieOptions = {
+      secure: config.env === "production" ? true : false,
+      httpOnly: true,
+      expires: new Date(0), // Setting an expired date will delete the cookie
+    };
+    res.cookie("refreshToken", "", cookieOptions);
+
+    sendResponse(res, {
+      statusCode: httpStatus.OK,
+      success: true,
+      message: "User Logged Out Successfully!",
+      data: null,
+    });
+  }
+);
+
 // const addToWishList = catchAsync(async (req: Request, res: Response) => {
 //   const id = req.params.id;
 //   const result = await UserService.addToWishList(id);
@@ -56,6 +74,7 @@ const loginUser = catchAsync(async (req: Request, res: Response) => {
 
 export const UserController = {
   createUser,
-  //   addToWishList,
   loginUser,
+  logoutUser,
+  //   addToWishList,
 };
