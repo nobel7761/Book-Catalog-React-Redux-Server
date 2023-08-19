@@ -1,5 +1,5 @@
 import { IGenericResponse } from "../../../interfaces/common";
-import { IBookFilters, booksFilterableFields } from "./books.constant";
+import { IBookFilters, bookSearchableFields } from "./books.constant";
 import { IBook, IReview } from "./books.interace";
 import { Book } from "./books.model";
 
@@ -12,7 +12,7 @@ const getAllBooks = async (
 
   if (searchTerm) {
     andConditions.push({
-      $or: booksFilterableFields.map((field) => ({
+      $or: bookSearchableFields.map((field) => ({
         [field]: {
           $regex: searchTerm,
           $options: "i",
