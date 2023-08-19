@@ -6,6 +6,10 @@ const createUserZodSchema = z.object({
     email: z.string({ required_error: "Email is required!" }),
     contact: z.string({ required_error: "Contact Number is required!" }),
     password: z.string({ required_error: "Password is required!" }),
+    wishList: z.array(z.string()),
+    readSoon: z.array(z.string()),
+    readFuture: z.array(z.string()),
+    finishReading: z.array(z.string()),
   }),
 });
 

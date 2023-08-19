@@ -5,6 +5,10 @@ export type IUser = {
   contact: string;
   email: string;
   password: string;
+  wishList?: string[];
+  readSoon?: string[];
+  readFuture?: string[];
+  finishReading?: string[];
 };
 
 export type ILoginUserResponse = {

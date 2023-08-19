@@ -37,6 +37,7 @@ const createUser = async (user: IUser): Promise<IUser | null> => {
 const loginUser = async (
   payload: ILoginUser
 ): Promise<ILoginUserResponse | null> => {
+  // console.log("payload", payload);
   const { email, password } = payload;
 
   const isUserExist = await User.findOne({ email: email });

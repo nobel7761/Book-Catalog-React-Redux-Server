@@ -22,7 +22,8 @@ const createUser: RequestHandler = catchAsync(
 );
 
 const loginUser = catchAsync(async (req: Request, res: Response) => {
-  const { ...loginData } = req.body;
+  const loginData = req.body;
+  // console.log("login data", loginData);
   const result = await UserService.loginUser(loginData);
 
   const { refreshToken, ...others } = result as ILoginUserResponse;
