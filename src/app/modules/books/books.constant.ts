@@ -11,5 +11,5 @@ export const bookSearchableFields = ["title", "author", "genre"];
 export type IBookFilters = {
   searchTerm?: string;
   genre?: string;
-  publication_year?: number;
+  publication_date?: string;
 };
