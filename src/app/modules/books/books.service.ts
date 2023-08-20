@@ -23,9 +23,18 @@ const getAllBooks = async (
 
   if (Object.keys(filtersData).length) {
     andConditions.push({
-      $and: Object.entries(filtersData).map(([field, value]) => ({
-        [field]: value,
-      })),
+      $and: Object.entries(filtersData).map(([field, value]) => {
+        if (field === "publication_date") {
+          const year = value.substring(0, 4);
+          return {
+            $expr: {
+              $eq: [{ $substr: ["$publication_date", 0, 4] }, year],
+            },
+          };
+        } else {
+          return { [field]: value };
+        }
+      }),
     });
   }
 
@@ -33,8 +42,12 @@ const getAllBooks = async (
     andConditions.length > 0 ? { $and: andConditions } : {};
 
   const result = await Book.find(whereConditions).sort({ createdAt: "desc" });
+  const count = await Book.countDocuments(whereConditions);
 
   return {
+    meta: {
+      total: count,
+    },
     data: result,
   };
 };
