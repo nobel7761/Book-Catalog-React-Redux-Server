@@ -20,4 +20,10 @@ router.patch(
   BookController.updateBookById
 );
 
+router.patch(
+  "/review/:id",
+  validateRequest(bookValidation.createReviewBookZodSchema),
+  BookController.createReviewByBookId
+);
+
 export const BookRoutes = router;

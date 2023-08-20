@@ -1,11 +1,5 @@
 import { z } from "zod";
 
-const reviewSchema = z.object({
-  user: z.string(),
-  rating: z.number().min(1).max(5),
-  comment: z.string(),
-});
-
 const createBookZodSchema = z.object({
   body: z.object({
     title: z.string(),
@@ -34,7 +28,15 @@ const updateBookZodSchema = z.object({
   }),
 });
 
+const createReviewBookZodSchema = z.object({
+  body: z.object({
+    name: z.string({ required_error: "Name is Required!" }),
+    review: z.string({ required_error: "Review is Required!" }),
+  }),
+});
+
 export const bookValidation = {
   createBookZodSchema,
   updateBookZodSchema,
+  createReviewBookZodSchema,
 };

@@ -1,7 +1,7 @@
 import { IGenericErrorMessage } from "./error";
 
 export type IGenericResponse<T> = {
-  meta: {
+  meta?: {
     total: number;
   };
   data: T;

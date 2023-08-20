@@ -1,12 +1,6 @@
 import mongoose, { Schema, model } from "mongoose";
 import { BookModel, IBook } from "./books.interace";
 
-const reviewSchema = new mongoose.Schema({
-  user: String,
-  rating: Number,
-  comment: String,
-});
-
 export const BookSchema = new Schema<IBook, BookModel>(
   {
     title: { type: String, required: true },
@@ -17,7 +11,12 @@ export const BookSchema = new Schema<IBook, BookModel>(
       email: { type: String, required: true },
     },
     publication_date: { type: String, required: true },
-    reviews: { type: [reviewSchema], required: true },
+    reviews: [
+      {
+        name: { type: String, required: true },
+        review: { type: String, required: true },
+      },
+    ],
     image_link: { type: String, required: true },
   },
   {
