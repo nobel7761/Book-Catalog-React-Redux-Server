@@ -16,6 +16,7 @@ const getAllBooks = catchAsync(async (req: Request, res: Response) => {
     statusCode: httpStatus.OK,
     success: true,
     message: "Books Retrieved Successfully",
+    meta: result.meta,
     data: result.data,
   });
 });

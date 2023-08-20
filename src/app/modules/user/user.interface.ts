@@ -12,8 +12,7 @@ export type IUser = {
 };
 
 export type ILoginUserResponse = {
-  accessToken: string;
-  refreshToken?: string;
+  email: string;
 };
 
 export type ILoginUser = {

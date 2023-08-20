@@ -1,11 +1,7 @@
 import httpStatus from "http-status";
 import ApiError from "../../../errors/ApiError";
-import { IBook } from "../books/books.interace";
-import { ILoginUser, ILoginUserResponse, IUser } from "./user.interface";
+import { ILoginUser, IUser } from "./user.interface";
 import { User } from "./user.model";
-import { jwtHelpers } from "../../../helpers/jwtHelpers";
-import config from "../../../config";
-import { Secret } from "jsonwebtoken";
 
 const createUser = async (user: IUser): Promise<IUser | null> => {
   const existingUserEmail = await User.findOne({ email: user.email });
@@ -34,10 +30,7 @@ const createUser = async (user: IUser): Promise<IUser | null> => {
   return result;
 };
 
-const loginUser = async (
-  payload: ILoginUser
-): Promise<ILoginUserResponse | null> => {
-  // console.log("payload", payload);
+const loginUser = async (payload: ILoginUser): Promise<IUser | null> => {
   const { email, password } = payload;
 
   const isUserExist = await User.findOne({ email: email });
@@ -48,41 +41,10 @@ const loginUser = async (
   if (isUserExist.password && isUserExist.password !== password)
     throw new ApiError(httpStatus.UNAUTHORIZED, "Password Does Not Match");
 
-  // if user exists and password match then JWT will generate a token witch will be sent from server side to client side. client side will store this token in the browser(localstorage/cookies) so that when user try to login for the next(hit the url) time then user does not need to give id, password again(if the token does not expired) to login. Then we'll send this token with every single request and server will check the token. if the token is authorized then user can make request and then server will give the access through route(so we need to handle this from route level). otherwise user will get failed.
-
-  // create access token & refresh token
-  const { email: emailAddress } = isUserExist;
-
-  const accessToken = jwtHelpers.createToken(
-    { emailAddress },
-    config.jwt.secret as Secret,
-    config.jwt.expires_in as string
-  );
-
-  const refreshToken = jwtHelpers.createToken(
-    { emailAddress },
-    config.jwt.refresh_secret as Secret,
-    config.jwt.refresh_expires_in as string
-  );
-
-  return {
-    accessToken,
-    refreshToken,
-  };
+  return isUserExist;
 };
-
-/* const addToWishList = async (id: string): Promise<IBook | null> => {
-  const result = await User.findById({ _id: id });
-
-  result?.reviews?.push(payload);
-
-  await result?.save();
-
-  return result;
-}; */
 
 export const UserService = {
   createUser,
-  //   addToWishList,
   loginUser,
 };

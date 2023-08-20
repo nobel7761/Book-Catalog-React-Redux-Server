@@ -23,10 +23,4 @@ router.post(
   UserController.logoutUser
 );
 
-// router.post(
-//   "/wish-list/:id",
-//   validateRequest(userValidation.addBookZodSchema),
-//   UserController.addToWishList
-// );
-
 export const UserRoutes = router;

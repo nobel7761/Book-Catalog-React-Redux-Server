@@ -27,15 +27,8 @@ const logoutZodSchema = z.object({
   }),
 });
 
-const addBookZodSchema = z.object({
-  body: z.object({
-    id: z.string({ required_error: "ID is required!" }),
-  }),
-});
-
 export const userValidation = {
   createUserZodSchema,
   loginZodSchema,
   logoutZodSchema,
-  addBookZodSchema,
 };
