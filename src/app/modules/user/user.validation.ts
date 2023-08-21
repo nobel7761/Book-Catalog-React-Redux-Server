@@ -27,8 +27,15 @@ const logoutZodSchema = z.object({
   }),
 });
 
+const updateFeaturedListZodSchema = z.object({
+  body: z.object({
+    email: z.string({ required_error: "User Email is Required!" }),
+  }),
+});
+
 export const userValidation = {
   createUserZodSchema,
   loginZodSchema,
   logoutZodSchema,
+  updateFeaturedListZodSchema,
 };

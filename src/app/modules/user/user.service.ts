@@ -45,7 +45,105 @@ const loginUser = async (payload: ILoginUser): Promise<IUser | null> => {
   return isUserExist;
 };
 
+const getUserByEmail = async (email: string): Promise<IUser | null> => {
+  const result = await User.findOne({ email: email });
+  return result;
+};
+
+const updateReadSoonList = async (
+  id: string,
+  email: string
+): Promise<IUser | null> => {
+  const result = await User.findOne({ email: email });
+
+  const bookexists = result?.readSoon?.includes(id);
+
+  if (bookexists) {
+    throw new ApiError(
+      httpStatus.BAD_REQUEST,
+      "Book Already Added in Read Soon List"
+    );
+  }
+
+  result?.readSoon?.push(id);
+
+  result?.save();
+
+  return result;
+};
+
+const updateReadFutureList = async (
+  id: string,
+  email: string
+): Promise<IUser | null> => {
+  const result = await User.findOne({ email: email });
+
+  const bookexists = result?.readFuture?.includes(id);
+
+  if (bookexists) {
+    throw new ApiError(
+      httpStatus.BAD_REQUEST,
+      "Book Already Added in Read Future List"
+    );
+  }
+
+  result?.readFuture?.push(id);
+
+  result?.save();
+
+  return result;
+};
+
+const updateFinishReadingList = async (
+  id: string,
+  email: string
+): Promise<IUser | null> => {
+  const result = await User.findOne({ email: email });
+
+  const bookexists = result?.finishReading?.includes(id);
+
+  if (bookexists) {
+    throw new ApiError(
+      httpStatus.BAD_REQUEST,
+      "Book Already Added in Finish Reading List"
+    );
+  }
+
+  result?.finishReading?.push(id);
+
+  result?.save();
+
+  return result;
+};
+
+const updateWishList = async (
+  id: string,
+  email: string
+): Promise<IUser | null> => {
+  const result = await User.findOne({ email: email });
+
+  const bookexists = result?.wishList?.includes(id);
+
+  if (bookexists) {
+    throw new ApiError(
+      httpStatus.BAD_REQUEST,
+      "Book Already Added in Wish List"
+    );
+  }
+
+  result?.wishList?.push(id);
+
+  result?.save();
+
+  return result;
+};
+
 export const UserService = {
   createUser,
   loginUser,
+  getUserByEmail,
+  updateWishList,
+  updateFinishReadingList,
+  updateReadFutureList,
+  updateReadSoonList,
 };
