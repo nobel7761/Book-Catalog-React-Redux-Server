@@ -70,6 +70,19 @@ const getAllReviews = async (
   };
 };
 
+const createReviewByBookId = async (
+  id: string,
+  payload: IReview
+): Promise<IBook | null> => {
+  const result = await Book.findById({ _id: id });
+
+  result?.reviews?.push(payload);
+
+  result?.save();
+
+  return result;
+};
+
 const createBook = async (payload: IBook): Promise<IBook> => {
   const result = await Book.create(payload);
   return result;
@@ -104,4 +117,5 @@ export const BookService = {
   updateBookById,
   deleteBookById,
   getAllReviews,
+  createReviewByBookId,
 };
