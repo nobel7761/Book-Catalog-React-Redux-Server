@@ -23,4 +23,34 @@ router.post(
   UserController.logoutUser
 );
 
+router.get("/:email", UserController.getUserByEmail);
+
+//wish-list
+router.patch(
+  "/wish-list/:id",
+  validateRequest(userValidation.updateFeaturedListZodSchema),
+  UserController.updateWishList
+);
+
+//read-soon
+router.patch(
+  "/read-soon/:id",
+  validateRequest(userValidation.updateFeaturedListZodSchema),
+  UserController.updateReadSoonList
+);
+
+//read-future
+router.patch(
+  "/read-future/:id",
+  validateRequest(userValidation.updateFeaturedListZodSchema),
+  UserController.updateReadFutureList
+);
+
+//finish-reading
+router.patch(
+  "/finish-reading/:id",
+  validateRequest(userValidation.updateFeaturedListZodSchema),
+  UserController.updateFinishReadingList
+);
+
 export const UserRoutes = router;
